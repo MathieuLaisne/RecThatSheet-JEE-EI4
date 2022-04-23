@@ -1,6 +1,7 @@
 package daoRTS;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import music.*;
 
@@ -13,69 +14,71 @@ public class dao {
 	public Musique getRecommendation(Musique m){
 		Genre[] derive = getDerives(m);
 	    ArrayList<Musique> Recs = new ArrayList<Musique>();
-	    foreach(Genre g in derive)
+	    for(Genre g : derive)
 	    {
 	        Musique[] musiqueDeriv = getMusique(g);
-	        foreach(Musique m2 in musiqueDeriv)
+	        for(Musique m2 : musiqueDeriv)
 	        {
-	            Recs.Add(m2);
-	            Recs.Add(m2);
+	            Recs.add(m2);
+	            Recs.add(m2);
 	        }
 	    }
-	    foreach(Musique m2 in getMusique(m.getGenre()))
+	    for(Musique m2 : getMusique(m.getGenre()))
 	    {
 	        if(m2 != m) 
 	        {
-	            Recs.Add(m2);
-	            Recs.Add(m2);
-	            Recs.Add(m2);
-	            Recs.Add(m2);
-	            Recs.Add(m2);
-	            Recs.Add(m2);
+	            Recs.add(m2);
+	            Recs.add(m2);
+	            Recs.add(m2);
+	            Recs.add(m2);
+	            Recs.add(m2);
+	            Recs.add(m2);
 	        }
 	    }
-	    foreach(Musique m2 in getOg(m))
+	    for(Musique m2 : getOG(m))
 	    {
-	        Recs.Add(m2);
-	        Recs.Add(m2);
-	        Recs.Add(m2);
-	        Recs.Add(m2);
+	        Recs.add(m2);
+	        Recs.add(m2);
+	        Recs.add(m2);
+	        Recs.add(m2);
 	    }
-	    return Recs[Random.nextInt(Recs.Count)];
+	    Random r = new Random();
+	    int ind = r.nextInt(Recs.size());
+	    return Recs.get(ind);
 	}
 
 	public Musique[] getOG(Musique m)
 	{
-	    Genre OG;
+	    Genre OG = null;
 	    ArrayList<Musique> music = new ArrayList<Musique>();
-	    foreach(Genre g in Genres)
+	    for(Genre g : Genres)
 	    {
-	        if(g.getDerives.contains(m.getGenre())) OG == g;
+	        if(g.getDerives().contains(m.getGenre())) OG = g;
 	    }
-	    foreach(Musique m2 in Musiques)
+	    for(Musique m2 : Musiques)
 	    {
-	        if(m2.getGenre() == OG) music.Add(m2);
+	        if(m2.getGenre() == OG) music.add(m2);
 	    }
-	    return music.toArray();
+	    return (Musique[]) music.toArray();
 	}
 
 	public Genre[] getDerives(Musique m)
 	{
 	    ArrayList<Genre> genres = new ArrayList<Genre>();
-	    foreach(Genre g in Genres)
+	    for(Genre g : Genres)
 	    {
-	        if(m.getDerives().contains(g)) genres.add(g);
+	        if(m.getGenre().getDerives().contains(g)) genres.add(g);
 	    }
-	    return genres.toArray();
+	    return (Genre[]) genres.toArray();
 	}
 
 	public Musique[] getMusique(Genre g)
 	{
 	    ArrayList<Musique> musiques = new ArrayList<Musique>();
-	    foreach(Musique m in Musiques)
+	    for(Musique m : Musiques)
 	    {
-	        if(m.getGenre() == g) musiques.Add(m);
+	        if(m.getGenre() == g) musiques.add(m);
 	    }
-	    return musiques.toArray();
+	    return (Musique[]) musiques.toArray();
 	}
 }
