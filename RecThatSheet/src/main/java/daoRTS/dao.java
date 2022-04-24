@@ -3,6 +3,10 @@ package daoRTS;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import music.*;
 
 public class dao {
@@ -10,6 +14,17 @@ public class dao {
 
 	Musique[] Musiques;
 	Genre[] Genres;
+	Artist[] Artists;
+	Album[] Albums;
+	
+	EntityManagerFactory emf;
+    EntityManager entityManager;
+
+    public dao()
+    {
+        emf = Persistence.createEntityManagerFactory("RecThatSheetDB");
+        entityManager = emf.createEntityManager();
+    }
 
 	public Musique getRecommendation(Musique m){
 		Genre[] derive = getDerives(m);
