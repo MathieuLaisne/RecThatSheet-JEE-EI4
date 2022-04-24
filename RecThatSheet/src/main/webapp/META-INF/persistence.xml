@@ -4,16 +4,19 @@
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
 			http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-	<persistence-unit name="_______">
+	<persistence-unit name="RecThatSheetDB">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class> _____.______ </class>
+		<class>Album.java</class>
+		<class>Artist.java</class>
+		<class>Genre.java</class>
+		<class>Musique.java</class>
 		<properties>
 			<property 	name="javax.persistence.jdbc.driver"
 						value="com.mysql.jdbc.Driver" />
 			<property 	name="javax.persistence.jdbc.url"
-						value="_______:_________:_________/_______?serverTimezone=UTC" />
-			<property name="javax.persistence.jdbc.user" value="________" />
-			<property name="javax.persistence.jdbc.password" value="_________" />
+						value="jdbc:mysql://localhost:3306/RecThatSheet?serverTimezone=UTC" />
+			<property name="javax.persistence.jdbc.user" value="localhost" />
+			<property name="javax.persistence.jdbc.password" value="" />
 		</properties>
 	</persistence-unit>
 </persistence>
