@@ -1,11 +1,13 @@
 package daoRTS;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import music.*;
 
@@ -24,6 +26,46 @@ public class dao {
     {
         emf = Persistence.createEntityManagerFactory("RecThatSheetDB");
         entityManager = emf.createEntityManager();
+    }
+    
+    public void getallMusiques()
+    {
+    	Query q = entityManager.createQuery( "from Musique" , Musique.class );
+		List<Musique> musiques ;
+		musiques = q.getResultList();
+		Musiques = musiques.toArray(Musiques);
+    }
+    
+    public void getallGenres()
+    {
+    	Query q = entityManager.createQuery( "from Genre" , Genre.class );
+		List<Genre> genres ;
+		genres = q.getResultList();
+		Genres = genres.toArray(Genres);
+    }
+    
+    public void getallArtists()
+    {
+    	Query q = entityManager.createQuery( "from Artiste" , Artist.class );
+		List<Artist> artistes ;
+		artistes = q.getResultList();
+		Artists = artistes.toArray(Artists);
+    }
+    
+    public void getallAlbums()
+    {
+    	Query q = entityManager.createQuery( "from Album" , Album.class );
+		List<Album> albums ;
+		albums = q.getResultList();
+		Albums = albums.toArray(Albums);
+    }
+    
+    public void init()
+    {
+    	getallMusiques();
+    	getallGenres();
+    	getallArtists();
+    	getallAlbums();
     }
 
 	public Musique getRecommendation(Musique m){
