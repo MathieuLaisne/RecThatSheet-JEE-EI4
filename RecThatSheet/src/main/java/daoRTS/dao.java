@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 import music.*;
@@ -19,6 +20,7 @@ public class dao {
 	Artist[] Artists;
 	Album[] Albums;
 	
+	@PersistenceUnit(name = "RecThatSheetDB")
 	EntityManagerFactory emf;
     EntityManager entityManager;
 

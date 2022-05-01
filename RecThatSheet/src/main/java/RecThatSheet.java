@@ -36,20 +36,46 @@ public class RecThatSheet extends HttpServlet {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			Musique[] musiques = d.Songs();
+			out.println("<html>");
+		    out.println("<body>");
+		    out.println("<head>");
+		    out.println("<title>Chanson Préférée</title>");
+		    out.println("</head>");
+		    out.println("<body>");
+		    out.println("<p>Choisissez votre chanson préférée:</p>");
+			out.println("<form action=\"/Rec\" method=\"post\">");
 			out.println("<select name=\"song\">");
 			for(Musique m : musiques)
 			{
 				out.println("<option value="+m.getid()+">"+m.toString()+"</option>");
 			}
 			out.println("</select>");
+			out.println("<button type=\"submit\">Valider</button>");
+			out.println("</form>");
+			out.println("</body>");
+		    out.println("</html>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		PrintWriter out = response.getWriter();
+		int id = Integer.parseInt(request.getParameter("song"));
+		Musique m = d.getMusique(id);
+		String Rec = d.getRecommendation(m).toString();
+		out.println("<html>");
+	    out.println("<body>");
+	    out.println("<head>");
+		out.println("<title>Recommendation</title>");
+		out.println("</head>");
+	    out.println("<body>");
+	    out.println("<p>Chanson ressemblant à " + m.toString() + ":</p>");
+	    out.println("<p>");
+	    out.println(Rec);
+	    out.println("</p>");
+	    out.println("</body>");
+	    out.println("</html>");
 	}
 
 }
