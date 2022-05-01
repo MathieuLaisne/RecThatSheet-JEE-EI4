@@ -14,7 +14,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Rec That Sheet</servlet-name>
+		<servlet-name>RecThatSheet</servlet-name>
 		<url-pattern>/RTS/*</url-pattern>
 	</servlet-mapping>
 </web-app>

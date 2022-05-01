@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import daoRTS.dao;
 import music.*;
 
 /**
@@ -38,7 +37,7 @@ public class RecThatSheet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			response.setContentType("text/html");
 			
-			String urlString = "../Songs";
+			String urlString = "http://localhost:8080/RecThatSheet/Songs";
 		    URL url = new URL(urlString);
 		    URLConnection conn = url.openConnection();
 		    InputStream is = conn.getInputStream();
@@ -74,7 +73,7 @@ public class RecThatSheet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		int id = Integer.parseInt(request.getParameter("song"));
 		
-		String urlString = "../Recommendation/" + id;
+		String urlString = "http://localhost:8080/RecThatSheet/Recommendation/" + id;
 	    URL url = new URL(urlString);
 	    URLConnection conn = url.openConnection();
 	    InputStream is = conn.getInputStream();
@@ -83,7 +82,7 @@ public class RecThatSheet extends HttpServlet {
 	    Musique[] musiques = objectMapper.readValue(json, Musique[].class);
 		String Rec = musiques[0].toString();
 		
-		urlString = "../Song/" + id;
+		urlString = "http://localhost:8080/RecThatSheet/Songs" + id;
 	    url = new URL(urlString);
 	    conn = url.openConnection();
 	    is = conn.getInputStream();
