@@ -35,7 +35,7 @@ public class RecThatSheet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			Musique[] musiques = d.Songs();
+			Musique[] musiques = d.getallMusiques();
 			out.println("<html>");
 		    out.println("<body>");
 		    out.println("<head>");

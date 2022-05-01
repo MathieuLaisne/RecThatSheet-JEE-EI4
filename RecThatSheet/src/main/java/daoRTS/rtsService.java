@@ -17,7 +17,7 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Artist[] getArtist()
 	 {
-		 return tot.Artists();
+		 return tot.getallArtists();
 	 }
 	 
 	 @Path("/Genres")
@@ -25,7 +25,7 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Genre[] getGenre()
 	 {
-		 return tot.Genres();
+		 return tot.getallGenres();
 	 }
 	 
 	 @Path("/Albums")
@@ -33,7 +33,7 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Album[] getAlbum()
 	 {
-		 return tot.Albums();
+		 return tot.getallAlbums();
 	 }
 	 
 	 @Path("/Songs")
@@ -41,7 +41,7 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Musique[] getSongs()
 	 {
-		 return tot.Songs();
+		 return tot.getallMusiques();
 	 }
 	 
 	 @Path("/Recommendations/{id}")

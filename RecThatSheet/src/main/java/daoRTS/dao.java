@@ -7,7 +7,6 @@ import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 import music.*;
@@ -20,7 +19,6 @@ public class dao {
 	Artist[] Artists;
 	Album[] Albums;
 	
-	@PersistenceUnit(name = "RecThatSheetDB")
 	EntityManagerFactory emf;
     EntityManager entityManager;
 
@@ -28,38 +26,51 @@ public class dao {
     {
         emf = Persistence.createEntityManagerFactory("RecThatSheetDB");
         entityManager = emf.createEntityManager();
+        init();
     }
     
-    public Musique[] Songs() {
-    	Query q = entityManager.createQuery("from Musique", Musique.class);
-    	List<Musique> lM = q.getResultList();
-    	Musiques = new Musique[lM.size()];
-    	lM.toArray(Musiques);
-    	return Musiques;
+    public Musique[] getallMusiques()
+    {
+    	Query q = entityManager.createQuery( "from Musique" , Musique.class );
+		List<Musique> musiques ;
+		musiques = q.getResultList();
+		Musiques = musiques.toArray(Musiques);
+		return Musiques;
     }
     
-    public Album[] Albums() {
-    	Query q = entityManager.createQuery("from Album", Album.class);
-    	List<Album> lM = q.getResultList();
-    	Albums = new Album[lM.size()];
-    	lM.toArray(Albums);
-    	return Albums;
+    public Genre[] getallGenres()
+    {
+    	Query q = entityManager.createQuery( "from Genre" , Genre.class );
+		List<Genre> genres ;
+		genres = q.getResultList();
+		Genres = genres.toArray(Genres);
+		return Genres;
     }
     
-    public Artist[] Artists() {
-    	Query q = entityManager.createQuery("from Artist", Artist.class);
-    	List<Artist> lM = q.getResultList();
-    	Artists = new Artist[lM.size()];
-    	lM.toArray(Artists);
-    	return Artists;
+    public Artist[] getallArtists()
+    {
+    	Query q = entityManager.createQuery( "from Artiste" , Artist.class );
+		List<Artist> artistes ;
+		artistes = q.getResultList();
+		Artists = artistes.toArray(Artists);
+		return Artists;
     }
     
-    public Genre[] Genres() {
-    	Query q = entityManager.createQuery("from Genre", Genre.class);
-    	List<Genre> lM = q.getResultList();
-    	Genres = new Genre[lM.size()];
-    	lM.toArray(Genres);
-    	return Genres;
+    public Album[] getallAlbums()
+    {
+    	Query q = entityManager.createQuery( "from Album" , Album.class );
+		List<Album> albums ;
+		albums = q.getResultList();
+		Albums = albums.toArray(Albums);
+		return Albums;
+    }
+    
+    public void init()
+    {
+    	getallMusiques();
+    	getallGenres();
+    	getallArtists();
+    	getallAlbums();
     }
     
     public Musique getMusique(int id) {
