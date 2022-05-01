@@ -16,7 +16,11 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Artist[] getArtist()
 	 {
+<<<<<<< Updated upstream
 		 return tot.Artists;
+=======
+		 return tot.getallArtists();
+>>>>>>> Stashed changes
 	 }
 	 
 	 @Path("/Genres")
@@ -24,7 +28,11 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Genre[] getGenre()
 	 {
+<<<<<<< Updated upstream
 		 return tot.Genres;
+=======
+		 return tot.getallGenres();
+>>>>>>> Stashed changes
 	 }
 	 
 	 @Path("/Albums")
@@ -32,7 +40,28 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Album[] getAlbum()
 	 {
+<<<<<<< Updated upstream
 		 return tot.Albums;
+=======
+		 return tot.getallAlbums();
+	 }
+	 
+	 @Path("/Songs")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Musique[] getSongs()
+	 {
+		 return tot.getallMusiques();
+	 }
+	 
+	 @Path("/Recommendations/{id}")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Musique getRecs(@PathParam("id") int id)
+	 {
+		 Musique m = tot.getMusique(id);
+		 return tot.getRecommendation(m);
+>>>>>>> Stashed changes
 	 }
 
 }

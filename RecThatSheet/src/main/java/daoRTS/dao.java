@@ -24,7 +24,61 @@ public class dao {
     {
         emf = Persistence.createEntityManagerFactory("RecThatSheetDB");
         entityManager = emf.createEntityManager();
+        init();
     }
+<<<<<<< Updated upstream
+=======
+    
+    public Musique[] getallMusiques()
+    {
+    	Query q = entityManager.createQuery( "from Musique" , Musique.class );
+		List<Musique> musiques ;
+		musiques = q.getResultList();
+		Musiques = musiques.toArray(Musiques);
+		return Musiques;
+    }
+    
+    public Genre[] getallGenres()
+    {
+    	Query q = entityManager.createQuery( "from Genre" , Genre.class );
+		List<Genre> genres ;
+		genres = q.getResultList();
+		Genres = genres.toArray(Genres);
+		return Genres;
+    }
+    
+    public Artist[] getallArtists()
+    {
+    	Query q = entityManager.createQuery( "from Artiste" , Artist.class );
+		List<Artist> artistes ;
+		artistes = q.getResultList();
+		Artists = artistes.toArray(Artists);
+		return Artists;
+    }
+    
+    public Album[] getallAlbums()
+    {
+    	Query q = entityManager.createQuery( "from Album" , Album.class );
+		List<Album> albums ;
+		albums = q.getResultList();
+		Albums = albums.toArray(Albums);
+		return Albums;
+    }
+    
+    public void init()
+    {
+    	getallMusiques();
+    	getallGenres();
+    	getallArtists();
+    	getallAlbums();
+    }
+    
+    public Musique getMusique(int id) {
+    	Query q = entityManager.createQuery("from Musique where SongID="+id, Genre.class);
+    	List<Musique> lM = q.getResultList();
+    	return lM.get(0);
+    }
+>>>>>>> Stashed changes
 
 	public Musique getRecommendation(Musique m){
 		Genre[] derive = getDerives(m);
