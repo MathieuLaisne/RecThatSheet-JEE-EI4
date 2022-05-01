@@ -1,11 +1,13 @@
 package daoRTS;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import music.*;
 
@@ -26,9 +28,6 @@ public class dao {
         entityManager = emf.createEntityManager();
         init();
     }
-<<<<<<< Updated upstream
-=======
-    
     public Musique[] getallMusiques()
     {
     	Query q = entityManager.createQuery( "from Musique" , Musique.class );
@@ -78,8 +77,25 @@ public class dao {
     	List<Musique> lM = q.getResultList();
     	return lM.get(0);
     }
->>>>>>> Stashed changes
-
+    
+    public Album getAlbum(int id) {
+    	Query q = entityManager.createQuery("from Album where SongID="+id, Genre.class);
+    	List<Album> lM = q.getResultList();
+    	return lM.get(0);
+    }
+    
+    public Genre getGenre(int id) {
+    	Query q = entityManager.createQuery("from Genre where SongID="+id, Genre.class);
+    	List<Genre> lM = q.getResultList();
+    	return lM.get(0);
+    }
+    
+    public Artist getArtist(int id) {
+    	Query q = entityManager.createQuery("from Artist where SongID="+id, Genre.class);
+    	List<Artist> lM = q.getResultList();
+    	return lM.get(0);
+    }
+    
 	public Musique getRecommendation(Musique m){
 		Genre[] derive = getDerives(m);
 	    ArrayList<Musique> Recs = new ArrayList<Musique>();

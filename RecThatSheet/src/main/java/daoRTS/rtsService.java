@@ -2,6 +2,7 @@ package daoRTS;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -16,11 +17,15 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Artist[] getArtist()
 	 {
-<<<<<<< Updated upstream
-		 return tot.Artists;
-=======
 		 return tot.getallArtists();
->>>>>>> Stashed changes
+	 }
+	 
+	 @Path("/Artist/{id}")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Artist gArtist(@PathParam("id") int id)
+	 {
+		 return tot.getArtist(id);
 	 }
 	 
 	 @Path("/Genres")
@@ -28,11 +33,15 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Genre[] getGenre()
 	 {
-<<<<<<< Updated upstream
-		 return tot.Genres;
-=======
 		 return tot.getallGenres();
->>>>>>> Stashed changes
+	 }
+	 
+	 @Path("/Genre/{id}")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Genre gGenre(@PathParam("id") int id)
+	 {
+		 return tot.getGenre(id);
 	 }
 	 
 	 @Path("/Albums")
@@ -40,10 +49,15 @@ public class rtsService {
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Album[] getAlbum()
 	 {
-<<<<<<< Updated upstream
-		 return tot.Albums;
-=======
 		 return tot.getallAlbums();
+	 }
+	 
+	 @Path("/Artist/{id}")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Album gAlbum(@PathParam("id") int id)
+	 {
+		 return tot.getAlbum(id);
 	 }
 	 
 	 @Path("/Songs")
@@ -54,6 +68,14 @@ public class rtsService {
 		 return tot.getallMusiques();
 	 }
 	 
+	 @Path("/Song/{id}")
+	 @GET
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Musique gSong(@PathParam("id") int id)
+	 {
+		 return tot.getMusique(id);
+	 }
+	 
 	 @Path("/Recommendations/{id}")
 	 @GET
 	 @Produces(MediaType.APPLICATION_JSON)
@@ -61,7 +83,6 @@ public class rtsService {
 	 {
 		 Musique m = tot.getMusique(id);
 		 return tot.getRecommendation(m);
->>>>>>> Stashed changes
 	 }
 
 }

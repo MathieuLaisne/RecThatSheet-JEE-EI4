@@ -1,13 +1,18 @@
 
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import daoRTS.dao;
 import music.*;
@@ -18,8 +23,6 @@ import music.*;
 @WebServlet("/SongList")
 public class RecThatSheet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	dao d = new dao();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,8 +37,16 @@ public class RecThatSheet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			response.setContentType("text/html");
+			
+			String urlString = "../Songs";
+		    URL url = new URL(urlString);
+		    URLConnection conn = url.openConnection();
+		    InputStream is = conn.getInputStream();
+		    String json = is.toString();
+		    ObjectMapper objectMapper = new ObjectMapper();
+		    Musique[] musiques = objectMapper.readValue(json, Musique[].class);
+		    
 			PrintWriter out = response.getWriter();
-			Musique[] musiques = d.getallMusiques();
 			out.println("<html>");
 		    out.println("<body>");
 		    out.println("<head>");
@@ -62,15 +73,32 @@ public class RecThatSheet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		int id = Integer.parseInt(request.getParameter("song"));
-		Musique m = d.getMusique(id);
-		String Rec = d.getRecommendation(m).toString();
+		
+		String urlString = "../Recommendation/" + id;
+	    URL url = new URL(urlString);
+	    URLConnection conn = url.openConnection();
+	    InputStream is = conn.getInputStream();
+	    String json = is.toString();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Musique[] musiques = objectMapper.readValue(json, Musique[].class);
+		String Rec = musiques[0].toString();
+		
+		urlString = "../Song/" + id;
+	    url = new URL(urlString);
+	    conn = url.openConnection();
+	    is = conn.getInputStream();
+	    json = is.toString();
+	    objectMapper = new ObjectMapper();
+	    musiques = objectMapper.readValue(json, Musique[].class);
+		String m = musiques[0].toString();
+		
 		out.println("<html>");
 	    out.println("<body>");
 	    out.println("<head>");
 		out.println("<title>Recommendation</title>");
 		out.println("</head>");
 	    out.println("<body>");
-	    out.println("<p>Chanson ressemblant à " + m.toString() + ":</p>");
+	    out.println("<p>Chanson ressemblant à " + m + ":</p>");
 	    out.println("<p>");
 	    out.println(Rec);
 	    out.println("</p>");
